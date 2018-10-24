@@ -6,7 +6,6 @@
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,20 +36,20 @@ public class NewServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, DAOException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet NewServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<title>Servlet NewServlet at </title>");
-            DataSourceFactory dt = new DataSourceFactory();
+            
             DAO dao = new DAO(DataSourceFactory.getDataSource());
             List<CustomerEntity>  custom = dao.customersInState(request.getParameter("state"));
-            out.println("<table>");
+            out.println("<table BORDER>");
             out.print("<tr>");
             out.print("<td>Id</td>");
             out.print("<td>Name</td>");
@@ -61,10 +60,9 @@ public class NewServlet extends HttpServlet {
                 out.print("<td>" + customer.getCustomerId() + "</td>");
                 out.print("<td>" + customer.getName() + "</td>");
                 out.print("<td>" + customer.getAddressLine1() + "</td>"); 
-               out.println("</tr>");
+                out.println("</tr>");
             }
             out.println("</table>");
-            
             out.println("</body>");
             out.println("</html>");
         }
